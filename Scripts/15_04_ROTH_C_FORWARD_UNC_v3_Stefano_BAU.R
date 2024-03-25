@@ -211,61 +211,10 @@ Df_BAU<-as.data.frame(Df_BAU)
 
 
 colnames(FORWARD@data)[2]="SOC_t0"
-colnames(FORWARD@data)[3]="SOC_CC_20"
+colnames(FORWARD@data)[3]="SOC_BAU_20"
 
 # Specify full path where you want to save the shapefile
 output_dir <- "C:/Users/User/..."
 
 # Save the shapefile
 shapefile(FORWARD, filename = file.path(output_dir, "FORWARD_04_AL_Fl_BAU_V1.shp"),overwrite=TRUE)
-
-########## BUSINESS AS USUAL ###################
-# Rename Df: Df stores SOC-pool at end of each year
-colnames(Df_BAU) <- c("DPM", "RPM", "BIO", "HUM", "IOM")
-SOC_total <- Df_BAU$DPM + Df_BAU$RPM + Df_BAU$BIO + Df_BAU$HUM + Df_BAU$IOM
-Df_BAU<-cbind(Df_BAU, SOC_total)
-colnames(Df_BAU) <- c("DPM", "RPM", "BIO", "HUM", "IOM","SOC_BAU")
-ID_gap<-Years_of_simulation
-Df_BAU$ID<-rep(seq(1, 1+nrow(Df_BAU)%/% ID_gap), each = ID_gap, length.out = nrow(Df_BAU))
-Df_BAU$year<- rep(seq(1:Years_of_simulation))
-Df_BAU$SOC_max<- (Df_BAU$SOC_BAU*runif(1, min = 1.01, max = 1.08))
-Df_BAU$SOC_min<- (Df_BAU$SOC_BAU*runif(1, min = 0.93, max = 0.99))##############################################
-
-
-Df_BAU<- Df_BAU[,-c(1:5)]
-Df_BAU<-Df_BAU[,-2]
-
-colnames(Df_BAU)=c("SOC_BAU","year",  "SOC_BAU_max", "SOC_BAU_min")
-
-
-# Data preparation for graphs
-
-######### Business as Usual ###########
-SOC_graph_BAU<-as.data.frame(Df_BAU)
-graph_years_BAU<-aggregate(. ~ year, SOC_graph_BAU, median)
-yearzero<-c( median(WARM_UP$SOC_t0),0, median(WARM_UP$SOC_t0)*runif(1, min = 1.05, max = 1.10),median(WARM_UP$SOC_t0)*runif(1, min = 0.93, max = 0.99))
-yearzero<-(as.data.frame(t(yearzero)))
-colnames(yearzero)=c("SOC_BAU","year",  "SOC_BAU_max", "SOC_BAU_min")
-# graph_years_BAU<-rbind(graph_years_BAU,yearzero)
-#######################################
-
-#Graphs of results
-
-library(ggplot2)
-
-ggplot(graph_years_BAU, aes(x = year, y = SOC_BAU)) +
-  geom_line() +
-  scale_linetype_manual(values=c("twodash"))+
-  scale_color_manual(values=c('blue'))+
-  scale_size_manual(values=c(1))+
-  theme(legend.position="top") +
-  geom_point(shape=23, fill="blue", color="darkred", size=3) +
-  geom_pointrange(aes(ymin=SOC_BAU_min, ymax=SOC_BAU_max)) +
-  ggtitle("SOC Trend 2023-2042") +
-  xlab("Years") + ylab("SOC (t/ha)") 
-
-setwd("C:/Users/User/...")
-
-save(Df_BAU,file="SOC_BAU_AL_onlyBAU_V1.Rdata")
-save(graph_years_BAU,file="SOC_Graph_BAU_AL_onlyBAU_V1.Rdata")
-save(rv, file = "rv.RData")
