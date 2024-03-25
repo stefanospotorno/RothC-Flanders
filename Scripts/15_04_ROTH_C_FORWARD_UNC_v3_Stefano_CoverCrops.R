@@ -36,7 +36,7 @@ Stack_Set_1<- stack(".../Stack_Set_FORWARD_04_AL_Fl.tif")
 
 Variables<-raster::extract(Stack_Set_1,Vector, sp=TRUE)
 
-# Cover crops scenario increase of 15% of C inputs
+# Cover crops scenario increase of 12% of C inputs
 
 C_inputs_increase <- 0.12
 
@@ -226,57 +226,3 @@ output_dir <- "C:/Users/User/..."
 
 # Save the shapefile
 shapefile(FORWARD, filename = file.path(output_dir, "FORWARD_04_AL_Fl_CC_V1.shp"),overwrite=TRUE)
-
-
-########## BUSINESS AS USUAL ###################
-# Rename Df: Df stores SOC-pool at end of each year
-colnames(Df_CC) <- c("DPM", "RPM", "BIO", "HUM", "IOM")
-SOC_total <- Df_CC$DPM + Df_CC$RPM + Df_CC$BIO + Df_CC$HUM + Df_CC$IOM
-Df_CC<-cbind(Df_CC, SOC_total)
-colnames(Df_CC) <- c("DPM", "RPM", "BIO", "HUM", "IOM","SOC_CC")
-ID_gap<-Years_of_simulation
-Df_CC$ID<-rep(seq(1, 1+nrow(Df_CC)%/% ID_gap), each = ID_gap, length.out = nrow(Df_CC))
-Df_CC$year<- rep(seq(1:Years_of_simulation))
-Df_CC$SOC_CC_max<- (Df_CC$SOC_CC*runif(1, min = 1.01, max = 1.04))
-Df_CC$SOC_CC_min<- (Df_CC$SOC_CC*runif(1, min = 0.96, max = 0.99))##############################################
-
-
-Df_CC<- Df_CC[,-c(1:5)]
-Df_CC<-Df_CC[,-2]
-
-colnames(Df_CC)=c("SOC_CC","year",  "SOC_CC_max", "SOC_CC_min")
-
-
-# Data preparation for graphs
-
-######### Cover Crops ###########
-SOC_graph_CC<-as.data.frame(Df_CC)
-graph_years_CC<-aggregate(. ~ year, SOC_graph_CC, median)
-yearzero<-c( median(WARM_UP$SOC_t0),0, median(WARM_UP$SOC_t0)*runif(1, min = 1.01, max = 1.05),median(WARM_UP$SOC_t0)*runif(1, min = 0.93, max = 0.99))
-yearzero<-(as.data.frame(t(yearzero)))
-colnames(yearzero)=c("SOC_CC","year",  "SOC_CC_max", "SOC_CC_min")
-# graph_years_CC<-rbind(graph_years_CC,yearzero)
-#######################################
-
-#Graphs of results
-
-library(ggplot2)
-
-ggplot(graph_years_CC, aes(x = year, y = SOC_CC)) +
-  geom_line() +
-  scale_linetype_manual(values=c("twodash"))+
-  scale_color_manual(values=c('blue'))+
-  scale_size_manual(values=c(1))+
-  theme(legend.position="top") +
-  geom_point(shape=23, fill="blue", color="darkred", size=3) +
-  geom_pointrange(aes(ymin=SOC_CC_min, ymax=SOC_CC_max)) +
-  ggtitle("SOC Trend 2023-2042") +
-  xlab("Years") + ylab("SOC (t/ha)") 
-
-ggplot(graph_years_CC, aes(x = year, y = SOC_CC)) +
-  geom_smooth()
-
-setwd("C:/Users/User/...Dataframes")
-
-save(Df_CC,file="SOC_CC_AL_V1.Rdata")
-save(graph_years_CC,file="SOC_Graph_CC_AL_V1.Rdata")
