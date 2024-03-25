@@ -46,8 +46,7 @@ SOC_im<-WARM_UP[[4]]
 
 clay_im<-Variables[[3]] 
 
-rv <- runif( nrow(WARM_UP[23]), min = 0.992, max =1.008)
-Cinputs_im<-WARM_UP[[23]]*rv
+Cinputs_im<-WARM_UP[[23]]
 
 DR_im<-Variables[[40]]
 
@@ -64,7 +63,7 @@ years20=seq(1/12,20,by=1/12)
 years1=seq(1/12,1,by=1/12) #this does the simulation run for 12 months and 1 year, and we will loop over 20 years (w=20)
 
 
-# ROTH C MODEL FUNCTION . 
+# ROTH C MODEL FUNCTION 
 
 #############function set up starts###############
 Roth_C<-function(Cinputs,years,DPMptf, RPMptf, BIOptf, HUMptf, FallIOM,Temp,Precip,Evp,Cov,Cov1,Cov2,soil.thick,SOC,clay,DR,bare1,LU)
@@ -77,7 +76,7 @@ Roth_C<-function(Cinputs,years,DPMptf, RPMptf, BIOptf, HUMptf, FallIOM,Temp,Prec
   #Temperature effects per month
   fT=fT.RothC(Temp[,2]) 
   
-  #Moisture effects per month . 
+  #Moisture effects per month. 
   
   fw1func<-function(P, E, S.Thick = 30, pClay = 32.0213, pE = 1, bare) 
   {
