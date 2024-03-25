@@ -15,22 +15,22 @@ library(SoilR)
 library(raster)
 library(soilassessment)
 
-WD_FOLDER <- "C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004"
+WD_FOLDER <- "C:/Users/User/..."
 setwd(WD_FOLDER)
 
 #Open empty vector
 
-Vector<-shapefile("Input/TargetPoints/AgriculturalPointsFromR.shp")
+Vector<-shapefile(".../AgriculturalPointsFromR.shp")
 
 # Vector_sub<-Vector[0:100,]
 
 #Open Warm Up Stack
 
-Stack_Set_warmup<- stack("Input/Stacks_Harmonization/Stack_Set_WARM_UP_04_AL_Fl.tif")
+Stack_Set_warmup<- stack(".../Stack_Set_WARM_UP_04_AL_Fl.tif")
 
 plot(Stack_Set_warmup)# Open Result from SPIN UP PROCESS. A vector with 5 columns , one for each pool
 
-Spin_up<-shapefile("Output/Review_V1/SPIN_UP_04_AL_Fl_V1.shp")
+Spin_up<-shapefile(".../SPIN_UP_04_AL_Fl_V1.shp")
 Spin_up<-as.data.frame(Spin_up)
 
 # Open Precipitation , temperature, and EVapotranspiration file 20 years x 12 = 240 layers x 3
@@ -44,7 +44,7 @@ PET<-stack("Input/Climate_BEL/PET_Stack_05-22_Fl.tif")
 
 # Set CRU LAYERS
 
-WD_AOI<-("C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Input/VL_Flanders")
+WD_AOI<-("C:/Users/User/.../VL_Flanders")
 
 # Open the shapefile of the region/country
 # setwd(WD_AOI)
@@ -418,7 +418,7 @@ colnames(WARM_UP@data)[22]="IOM_w_max"
 colnames(WARM_UP@data)[23]="Cin_min"
 colnames(WARM_UP@data)[24]="Cin_max"
 
-setwd("C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Output/Review_V1")
+setwd("C:/Users/User/.../Output")
 
 # Specify full path where you want to save the shapefile
 output_dir <- "C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Output/Review_V1"
