@@ -20,7 +20,7 @@ library(raster)
 library(soilassessment)
 
 # Set working directory 
-WD_FOLDER <- "C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Input"
+WD_FOLDER <- "C:/Users/User/.../Input"
 
 setwd(WD_FOLDER)
 
@@ -437,7 +437,7 @@ colnames(C_INPUT_EQ@data)[23]="IOM_max"
 
 
 # Specify full path where you want to save the shapefile
-output_dir <- "C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Output/Review_V1"
+output_dir <- "C:/Users/User/.../Output/"
 
 # Save the shapefile with the desired name
 shapefile(C_INPUT_EQ, filename = file.path(output_dir, "SPIN_UP_04_AL_Fl_V1.shp"),overwrite=TRUE)
