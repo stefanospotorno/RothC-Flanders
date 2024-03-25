@@ -82,9 +82,9 @@ wintercereals<-2.15 #tC/ha
 silagemaize<-1.25 #tC/ha
 yellowmustard<-1.36 #tC/ha
 
-rotation4<-rep((potato+2*wintercereals+silagemaize)/4+yellowmustard,Years_of_simulation)
+rotation4<-rep((potato+2*(wintercereals+silagemaize)/4+yellowmustard,Years_of_simulation)
 
-Cinput_4<-1.25*sum(rotation4)/Years_of_simulation
+Cinput_4<-sum(rotation4)/Years_of_simulation
 
 # Define the years to run the model
 
@@ -248,55 +248,4 @@ output_dir <- "C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL
 
 # Save the shapefile
 shapefile(FORWARD, filename = file.path(output_dir, "FORWARD_04_AL_Fl_rot4_V1.shp"),overwrite=TRUE)
-
-
-########## ROTATION 1 #######################
-# Rename Df: Df stores SOC-pool at end of each year
-
-colnames(Df_rot4) <- c("DPM", "RPM", "BIO", "HUM", "IOM")
-SOC_total <- Df_rot4$DPM + Df_rot4$RPM + Df_rot4$BIO + Df_rot4$HUM + Df_rot4$IOM
-Df_rot4<-cbind(Df_rot4, SOC_total)
-colnames(Df_rot4) <- c("DPM", "RPM", "BIO", "HUM", "IOM","SOC_rot4")
-ID_gap<-Years_of_simulation
-Df_rot4$ID<-rep(seq(1, 1+nrow(Df_rot4)%/% ID_gap), each = ID_gap, length.out = nrow(Df_rot4))
-Df_rot4$year<- rep(seq(1:Years_of_simulation))
-Df_rot4$SOC_rot4_max<- (Df_rot4$SOC_rot4*runif(1, min = 1.01, max = 1.04))
-Df_rot4$SOC_rot4_min<- (Df_rot4$SOC_rot4*runif(1, min = 0.96, max = 0.99))
-
-##############################################
-
-
-Df_rot4<- Df_rot4[,-c(1:5)]
-Df_rot4<-Df_rot4[,-2]
-
-colnames(Df_rot4)=c("SOC_rot4","year",  "SOC_rot4_max", "SOC_rot4_min")
-
-
-SOC_graph_rot4<-as.data.frame(Df_rot4)
-graph_years_rot4<-aggregate(. ~ year, SOC_graph_rot4, median)
-yearzero<-c( median(WARM_UP$SOC_t0),0, median(WARM_UP$SOC_t0)*runif(1, min = 1.01, max = 1.06),median(WARM_UP$SOC_t0)*runif(1, min = 0.93, max = 0.99))
-yearzero<-(as.data.frame(t(yearzero)))
-colnames(yearzero)=c("SOC_rot4","year",  "SOC_rot4_max", "SOC_rot4_min")
-# graph_years_rot4<-rbind(graph_years_rot4,yearzero)
-#######################################
-
-#Graphs of results
-
-library(ggplot2)
-
-ggplot(graph_years_rot4, aes(x = year, y = SOC_rot4)) +
-  geom_line() +
-  scale_linetype_manual(values=c("twodash"))+
-  scale_color_manual(values=c('blue'))+
-  scale_size_manual(values=c(1))+
-  theme(legend.position="top") +
-  geom_point(shape=23, fill="blue", color="darkred", size=3) +
-  geom_pointrange(aes(ymin=SOC_rot4_min, ymax=SOC_rot4_max)) +
-  ggtitle("SOC Trend 2023-2042") +
-  xlab("Years") + ylab("SOC (t/ha)") 
-
-setwd("C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Output/Review_V1/Dataframes")
-
-save(Df_rot4,file="SOC_rot4_AL_V1.Rdata")
-save(graph_years_rot4,file="SOC_Graph_rot4_AL_V1.Rdata")
 
