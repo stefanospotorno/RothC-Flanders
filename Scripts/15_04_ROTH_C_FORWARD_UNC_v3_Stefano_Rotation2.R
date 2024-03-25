@@ -9,27 +9,28 @@
 #####################################
 
 # rm(list=ls()) 
-library(SoilR)
+
 library(sp)
+library(SoilR)
 library(raster)
 library(soilassessment)
 
-# WD_OUT<-("C:/Users/U0159858/OneDrive - KU Leuven/Roth-C/01_Roth-C_Flanders_AL/WARM_UP_2004/Output")
-WD_OUT<-("C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004/Output/Review_V1")
+WD_OUT<-("C:/Users/User/.../Output/")
 
-# working_dir<-setwd("C:/Users/U0159858/OneDrive - KU Leuven/Roth-C/01_Roth-C_Flanders_AL/WARM_UP_2004")
-working_dir<-setwd("C:/Users/User/OneDrive - unige.it/Roth-C(1)/01_Roth-C_Flanders_AL/WARM_UP_2004")
+working_dir<-setwd("C:/Users/User/...")
 
 # OPEN THE VECTOR OF POINTS
-Vector<-shapefile("Output/Review_V1/target_points_V1.shp")
+
+Vector<-shapefile(".../target_points_V1.shp")
 
 # OPEN THE RESULT VECTOR FROM THE WARM UP PROCESS
 
-WARM_UP<-shapefile("Output//Review_V1/WARM_UP_04_AL_Fl_filtered_V1.shp")
+WARM_UP<-shapefile(".../WARM_UP_04_AL_Fl_filtered_V1.shp")
+
 
 # OPEN THE STACK WITH THE VARIABLES FOR THE FORWARD PROCESS
 
-Stack_Set_1<- stack("Input/Stacks_Harmonization/Stack_Set_FORWARD_04_AL_Fl.tif")
+Stack_Set_1<- stack(".../Stack_Set_FORWARD_04_AL_Fl.tif")
 
 # extract variables to points
 
