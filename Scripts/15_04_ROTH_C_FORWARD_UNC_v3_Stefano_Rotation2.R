@@ -82,7 +82,7 @@ yellowmustard<-1.36 #tC/ha
 
 rotation2<-rep(silagemaize+yellowmustard,Years_of_simulation)
 
-Cinput_2<-1.25*sum(rotation2)/Years_of_simulation
+Cinput_2<-sum(rotation2)/Years_of_simulation
 
 # Define the years to run the model
 
