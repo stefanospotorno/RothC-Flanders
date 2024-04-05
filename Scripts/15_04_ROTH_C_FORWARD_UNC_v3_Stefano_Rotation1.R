@@ -56,8 +56,6 @@ SOC_im<-WARM_UP[[4]]
 
 clay_im<-Variables[[3]] 
 
-Cinputs_im<-WARM_UP[[10]]
-
 # DR_im<-Variables[[40]]
 DR_im<- rep(1.36,length(Variables[[40]])) #Decomposition rate (DPM/RPM) average between crop specific for grain maize and yellow mustard
 
@@ -83,7 +81,7 @@ yellowmustard<-1.36 #tC/ha
 
 rotation1<-rep(grainmaize+yellowmustard,Years_of_simulation)
 
-Cinput_1<-1.2*sum(rotation1)/Years_of_simulation
+Cinput_1<-sum(rotation1)/Years_of_simulation
 
 # Define the years to run the model
 
