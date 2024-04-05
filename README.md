@@ -11,9 +11,14 @@ The scripts section contains the scripts related only to the RothC model:
 - Six different scripts for the Forward phase (one for each scenario studied: BAU, Cover Crops and four different improved crop rotations)
 
 The Flies/Output section is divided into sub-folders containing the output shapefiles (and related shx, cpg, etc...) of each phase:
+
 1.SPIN_UP
+
 2.WARM_UP
+
 3.BAU
+
 4.CoverCrops
+
 5.ImprovedCropRotation
 
