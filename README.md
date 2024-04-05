@@ -19,6 +19,7 @@ The Flies/Output section is divided into sub-folders containing the output shape
 5. ImprovedCropRotation
 
 And a sixth folder containing the dataframes which express the trend of SOC in the different forward scenarios from year zero to year 20:
+
 6. Dataframes - SOC trend
 
 Each FORWARD result is a point-shapefile, with three columns attribute table:
