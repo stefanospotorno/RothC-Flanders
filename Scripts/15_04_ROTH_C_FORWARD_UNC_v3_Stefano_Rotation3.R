@@ -84,7 +84,7 @@ yellowmustard<-1.36 #tC/ha
 
 rotation3<-rep((silagemaize+ 2*wintercereals)/3+yellowmustard,Years_of_simulation)
 
-Cinput_3<-1.25*sum(rotation3)/Years_of_simulation
+Cinput_3<-sum(rotation3)/Years_of_simulation
 
 # Define the years to run the model
 
