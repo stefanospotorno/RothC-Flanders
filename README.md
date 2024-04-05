@@ -21,4 +21,4 @@ The Flies/Output section is divided into sub-folders containing the output shape
 Each FORWARD result is a point-shapefile, with three columns attribute table:
 1. ESA_L_C -> refers to the Land Use Class of each point (2 means agricultural arable land)
 2. SOC_t0 -> the Soil Organic Carbon content in 2022 (resulting from the Warm Up phase)
-3. SOC_***_2 -> the Soil Organic Carbon content at 20 years for the specific scenario
+3. SOC_***_2 -> the Soil Organic Carbon content at 20 years (2042) for the specific scenario
