@@ -65,7 +65,7 @@ LU_im<-Variables[[41]]
 
 NPP_im<-NPP_points[[2]]
 
-NPP_mean<-mean(na.omit(NPP_im))
+NPP_mean<-mean(na.omit(NPP_im))*0.8
 
 ################# DURATION OF THE FORWARD PHASE ###############
 
