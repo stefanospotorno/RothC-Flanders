@@ -64,7 +64,7 @@ LU_im<-Variables[[41]]
 
 NPP_im<-NPP_points[[2]]
 
-NPP_mean<-mean(na.omit(NPP_im))
+NPP_mean<-mean(na.omit(NPP_im))*0.8
 
 ################# DURATION OF THE FORWARD PHASE ###############
 
@@ -197,7 +197,7 @@ if (any(is.na(Evp[,2])) | any(is.na(Temp[,2])) | any(is.na(SOC_im[i])) | any(is.
 soil.thick=30  #Soil thickness (organic layer topsoil), in cm
 SOC<-SOC_im[i]      #Soil organic carbon in Mg/ha 
 clay<-clay_im[i]        #Percent clay %
-Cinputs<-Cinputs_im[i]    #Annual C inputs to soil in Mg/ha/yr
+#Cinputs<-Cinputs_im[i]    #Annual C inputs to soil in Mg/ha/yr
 
 DR<-DR_im[i]              # DPM/RPM (decomplosable vs resistant plant material.)
 bare1<-(Cov1>0.8)           # If the surface is bare or vegetated
