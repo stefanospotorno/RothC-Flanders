@@ -1,5 +1,5 @@
-This repository is intended to provide additional information for the paper "Carbon Farming practices assessment: Modelling spatial changes of Soil Organic Carbon in Flanders, Belgium" - By Spotorno, Gobin, Vanongeval, Del Borghi and Gallo - 
-2024 (doi: https://doi.org/10.1016/j.scitotenv.2024.171267)
+This repository is intended to provide additional information for the paper "Carbon Farming practices assessment: Modelling spatial changes of Soil Organic Carbon in Flanders, Belgium" - By Spotorno, Gobin, Vanongeval, Del Borghi and Gallo - 2024 
+(doi: https://doi.org/10.1016/j.scitotenv.2024.171267)
 
 The repository is divided in two main sections:
 1. Scripts
